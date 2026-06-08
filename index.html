@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jonathan Sisa Khabusi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F7F5F0;
+      --surface: #FFFFFF;
+      --ink: #1A1A18;
+      --ink-muted: #6B6B65;
+      --ink-faint: #9E9E97;
+      --accent: #2D6A4F;
+      --accent-light: #D8F0E5;
+      --accent-mid: #52B788;
+      --amber: #B5621A;
+      --amber-light: #FAE8D5;
+      --coral: #C0392B;
+      --coral-light: #FAEAEA;
+      --border: rgba(26,26,24,0.10);
+      --border-strong: rgba(26,26,24,0.18);
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --mono: 'DM Mono', monospace;
+      --radius: 6px;
+      --radius-lg: 10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(247,245,240,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 58px;
+    }
+    .nav-brand {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 13.5px;
+      font-weight: 400;
+      color: var(--ink-muted);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 58px;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 3.5rem 5rem 5rem;
+      border-right: 1px solid var(--border);
+    }
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 22px; height: 1px;
+      background: var(--accent);
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(38px, 5vw, 58px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-bio {
+      font-size: 15.5px;
+      color: var(--ink-muted);
+      line-height: 1.75;
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 20px;
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      border-radius: var(--radius);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #236041; }
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--border-strong);
+    }
+    .btn-outline:hover { background: var(--surface); }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 5rem 5rem 3.5rem;
+      gap: 1.25rem;
+    }
+    .fact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.5s forwards;
+    }
+    .fact-card:nth-child(1) { animation-delay: 0.1s; }
+    .fact-card:nth-child(2) { animation-delay: 0.2s; }
+    .fact-card:nth-child(3) { animation-delay: 0.3s; }
+    .fact-card:nth-child(4) { animation-delay: 0.4s; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fact-label {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 4px;
+    }
+    .fact-value {
+      font-size: 14.5px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 6rem 5rem; }
+    section:nth-of-type(even) { background: var(--surface); }
+
+    .section-header {
+      display: flex; align-items: baseline; gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+    .section-num {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-faint);
+      letter-spacing: 0.05em;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-body p {
+      font-size: 15.5px;
+      color: var(--ink-muted);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+    .about-body p:last-child { margin-bottom: 0; }
+    blockquote {
+      border-left: 2px solid var(--accent);
+      padding: 0.75rem 1.25rem;
+      margin: 1.5rem 0;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--ink-muted);
+    }
+    .timeline { list-style: none; display: flex; flex-direction: column; gap: 0; }
+    .tl-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tl-item:last-child { border-bottom: none; }
+    .tl-year { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); padding-top: 3px; }
+    .tl-content { }
+    .tl-title { font-size: 14.5px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+    .tl-sub { font-size: 13px; color: var(--ink-muted); }
+
+    /* ── REPORT SECTION ── */
+    .report-intro {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
+      align-items: start;
+    }
+    .report-intro-body { }
+    .report-intro-body p {
+      font-size: 15.5px;
+      color: var(--ink-muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .report-intro-body p:last-child { margin-bottom: 0; }
+    .report-meta-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+    .report-meta-item {
+      display: flex; flex-direction: column; gap: 2px;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .report-meta-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .report-meta-item:first-child { padding-top: 0; }
+    .rmi-label { font-family: var(--mono); font-size: 10.5px; color: var(--ink-faint); letter-spacing: 0.08em; text-transform: uppercase; }
+    .rmi-val { font-size: 14px; font-weight: 500; color: var(--ink); }
+
+    /* stat cards */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+    .stat-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.25rem 1rem;
+    }
+    .stat-box.accent { background: var(--accent); border-color: var(--accent); }
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+    .stat-box.accent .stat-number { color: #fff; }
+    .stat-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.4; }
+    .stat-box.accent .stat-desc { color: rgba(255,255,255,0.8); }
+
+    /* SPEI table */
+    .spei-section { margin-bottom: 3.5rem; }
+    .subsection-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .subsection-lead {
+      font-size: 14.5px;
+      color: var(--ink-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      max-width: 640px;
+    }
+    .spei-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    .spei-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      padding: 0 12px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .spei-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+      font-size: 13.5px;
+    }
+    .spei-table tr:last-child td { border-bottom: none; }
+    .spei-chip {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .chip-ewet  { background: #1a6e9e22; color: #0d4f75; }
+    .chip-swet  { background: #2d6a4f22; color: #1a4d38; }
+    .chip-mwet  { background: #52b78822; color: #2d6a4f; }
+    .chip-norm  { background: #88888822; color: #444; }
+    .chip-mdry  { background: #b5621a22; color: #7a3f0e; }
+    .chip-sdry  { background: #c0392b22; color: #821d14; }
+    .chip-edry  { background: #7b000022; color: #5a0000; }
+
+    /* ZARDI cards */
+    .zardi-section { margin-bottom: 3.5rem; }
+    .zardi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .zardi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.25rem 1rem;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .zardi-card:hover {
+      border-color: var(--border-strong);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .zardi-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .zardi-name { font-family: var(--serif); font-size: 17px; font-weight: 500; letter-spacing: -0.01em; }
+    .zardi-region { font-size: 12px; color: var(--ink-faint); margin-top: 1px; }
+    .trigger-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 9px;
+      border-radius: 30px;
+      font-size: 11.5px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .badge-dual    { background: var(--amber-light); color: var(--amber); }
+    .badge-drought { background: var(--coral-light);  color: var(--coral); }
+    .badge-wetness { background: var(--accent-light); color: var(--accent); }
+    .zardi-crops {
+      font-size: 12.5px;
+      color: var(--ink-muted);
+      line-height: 1.5;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      margin-top: 10px;
+    }
+    .zardi-crops strong { font-weight: 500; color: var(--ink-faint); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-bottom: 3px; }
+
+    /* Findings */
+    .findings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 3.5rem;
+    }
+    .finding-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+    .finding-card.featured {
+      background: var(--accent);
+      border-color: var(--accent);
+      grid-column: span 2;
+    }
+    .finding-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-faint);
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .finding-card.featured .finding-num { color: rgba(255,255,255,0.6); }
+    .finding-title {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .finding-card.featured .finding-title { color: #fff; }
+    .finding-body {
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.7;
+    }
+    .finding-card.featured .finding-body { color: rgba(255,255,255,0.82); }
+
+    /* ENSO section */
+    .enso-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .enso-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      background: var(--surface);
+    }
+    .enso-title {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .enso-body { font-size: 14px; color: var(--ink-muted); line-height: 1.7; }
+
+    /* Decade volatility table */
+    .decade-table-wrap { overflow-x: auto; margin-bottom: 2rem; }
+    .decade-table { border-collapse: collapse; width: 100%; font-size: 12.5px; min-width: 640px; }
+    .decade-table th {
+      background: var(--bg);
+      padding: 8px 10px;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: var(--ink-faint);
+      border: 1px solid var(--border);
+      font-weight: 500;
+    }
+    .decade-table th:first-child { text-align: left; }
+    .decade-table td {
+      padding: 7px 10px;
+      text-align: center;
+      border: 1px solid var(--border);
+      font-size: 12.5px;
+    }
+    .decade-table td:first-child { text-align: left; font-weight: 500; }
+    .decade-table tr:hover td { background: var(--bg); }
+    .vol-low  { color: var(--accent); }
+    .vol-high { color: var(--coral); font-weight: 500; }
+    .vol-peak { background: var(--coral-light) !important; color: var(--coral); font-weight: 700; }
+
+    /* Insurance design */
+    .insurance-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 3.5rem;
+    }
+    .ins-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      background: var(--surface);
+    }
+    .ins-icon {
+      width: 38px; height: 38px;
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      margin-bottom: 1rem;
+    }
+    .icon-wet  { background: var(--accent-light); }
+    .icon-dry  { background: var(--coral-light); }
+    .icon-dual { background: var(--amber-light); }
+    .ins-title { font-family: var(--serif); font-size: 17px; font-weight: 500; margin-bottom: 6px; }
+    .ins-trigger {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-faint);
+      background: var(--bg);
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    .ins-body { font-size: 13.5px; color: var(--ink-muted); line-height: 1.65; }
+
+    /* Recommendations */
+    .rec-list { list-style: none; display: flex; flex-direction: column; gap: 1px; }
+    .rec-item {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .rec-item:last-child { border-bottom: none; }
+    .rec-num {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-faint);
+      padding-top: 3px;
+    }
+    .rec-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+    .rec-body { font-size: 14px; color: var(--ink-muted); line-height: 1.65; }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .contact-left { }
+    .contact-left p {
+      font-size: 15.5px;
+      color: var(--ink-muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 10px; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 14px;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 10px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: all 0.15s;
+    }
+    .contact-link:hover { border-color: var(--border-strong); background: var(--bg); }
+    .contact-link svg { flex-shrink: 0; }
+    .contact-right {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+    .contact-right blockquote {
+      border-left: 2px solid var(--accent-mid);
+      padding: 1rem 1.25rem;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16.5px;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+    }
+    .quote-attr { font-size: 12.5px; color: var(--ink-faint); padding-left: 1.25rem; }
+
+    /* Footer */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.6);
+      padding: 2.5rem 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    footer .footer-name {
+      font-family: var(--serif);
+      color: #fff;
+      font-size: 15px;
+    }
+    footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
+    footer a:hover { color: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { gap: 1.25rem; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 3rem 1.5rem 2rem; border-right: none; border-bottom: 1px solid var(--border); }
+      .hero-right { padding: 2rem 1.5rem 3rem; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid, .findings-grid, .enso-grid, .contact-grid, .report-intro { grid-template-columns: 1fr; }
+      .findings-grid .finding-card.featured { grid-column: span 1; }
+      .stat-row { grid-template-columns: repeat(2, 1fr); }
+      .insurance-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      .section-rule { display: none; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .zardi-grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#" class="nav-brand">Jonathan Sisa Khabusi</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#report">Research</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">Actuarial · Climate · Insurance</div>
+      <h1 class="hero-name">Turning<br/><em>data into</em><br/>decisions.</h1>
+      <p class="hero-bio">
+        Ugandan actuarial mathematician and data analyst with a focus on climate risk, agricultural insurance, and sustainable development across East Africa.
+      </p>
+      <div class="hero-cta-row">
+        <a href="#report" class="btn btn-primary">Read the research</a>
+        <a href="#contact" class="btn btn-outline">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="fact-card">
+        <div class="fact-label">Affiliation</div>
+        <div class="fact-value">University of Leeds — BSc Actuarial Mathematics, 2:1</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-label">Experience</div>
+        <div class="fact-value">MX Underwriting (formerly CLS Risk Solutions), parametric insurance</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-label">Research focus</div>
+        <div class="fact-value">Climate risk in Ugandan smallholder agriculture — SPEI, ENSO, IOD</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-label">Based in</div>
+        <div class="fact-value">Kampala, Uganda</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>
+          Born and raised in Kampala, Uganda, Jonathan's academic journey took him from Lohana Academy through St. Henry's College Kitovu — where he achieved an outstanding grade of 13 in 8 at UCE level — to King's College Budo, before earning a place at the University of Leeds to read Actuarial Mathematics.
+        </p>
+        <p>
+          At Leeds, he secured a placement year with CLS Risk Solutions, which subsequently became MX Underwriting following an acquisition by Specialist Risk Group — his first exposure to the M&A world. His university years were as active as they were academic: badminton, tennis, and dodgeball societies kept him connected to a wide community of people.
+        </p>
+        <blockquote>"Jonathan loves concerts!" — Jonathan's friends, 2024</blockquote>
+        <p>
+          His graduate research centred on combinations of climate hazards and the probability of their future occurrence — work that laid the foundation for the climate risk report presented on this page. He currently holds three siblings, one son (a red fluffy fuggler named Pierre), and an ambition to occupy a meaningful seat at the corporate table.
+        </p>
+      </div>
+      <div>
+        <ul class="timeline">
+          <li class="tl-item">
+            <span class="tl-year">2012–16</span>
+            <div class="tl-content">
+              <div class="tl-title">St. Henry's College Kitovu</div>
+              <div class="tl-sub">UCE — Grade 13 in 8. Masaka, Uganda.</div>
+            </div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-year">2016–18</span>
+            <div class="tl-content">
+              <div class="tl-title">King's College Budo</div>
+              <div class="tl-sub">UACE — AAA. Wakiso, Uganda.</div>
+            </div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-year">2019–23</span>
+            <div class="tl-content">
+              <div class="tl-title">University of Leeds</div>
+              <div class="tl-sub">BSc Actuarial Mathematics, 2:1. Leeds, UK.</div>
+            </div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-year">2021–22</span>
+            <div class="tl-content">
+              <div class="tl-title">MX Underwriting (Specialist Risk Group)</div>
+              <div class="tl-sub">Placement year — parametric & specialty insurance.</div>
+            </div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-year">2023</span>
+            <div class="tl-content">
+              <div class="tl-title">Graduate research</div>
+              <div class="tl-sub">"Combinations of Hazards" — African climate change.</div>
+            </div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-year">2024–</span>
+            <div class="tl-content">
+              <div class="tl-title">Lead Barista &amp; Independent researcher</div>
+              <div class="tl-sub">Kampala, Uganda. Seeking corporate analytical role.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH / REPORT -->
+  <section id="report">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Research</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <!-- Report intro -->
+    <div class="report-intro">
+      <div class="report-intro-body">
+        <p style="font-family:'Playfair Display',serif; font-size:20px; font-weight:500; line-height:1.35; letter-spacing:-0.01em; color:var(--ink); margin-bottom:1rem;">
+          Mitigating climate risk in Uganda: linking rainfall patterns to smallholder farmer planting decisions
+        </p>
+        <p>
+          Uganda's agricultural sector — which contributes 24.7% of GDP and employs 61% of the population — operates in a climate that has shifted fundamentally since 2000. This report analyses 73 years of localised weather data and 63 years of crop yield records across the country's ten Zonal Agricultural Research and Development Institutes (ZARDIs).
+        </p>
+        <p>
+          The central argument: planting decisions based on accumulated ancestral knowledge are becoming dangerously unreliable. The seasons farmers plan for are shifting. The likelihood of a severely wet or dry season has almost doubled since the 1980s. Index-based parametric insurance — calibrated to objective climate data rather than physical loss adjustment — is one of the most effective tools available to protect farmers from risks they can no longer reliably predict.
+        </p>
+      </div>
+      <div class="report-meta-card">
+        <div class="report-meta-item">
+          <span class="rmi-label">Author</span>
+          <span class="rmi-val">Jonathan Sisa Khabusi</span>
+        </div>
+        <div class="report-meta-item">
+          <span class="rmi-label">Date</span>
+          <span class="rmi-val">June 2026</span>
+        </div>
+        <div class="report-meta-item">
+          <span class="rmi-label">Data period</span>
+          <span class="rmi-val">1950 – 2023</span>
+        </div>
+        <div class="report-meta-item">
+          <span class="rmi-label">Zones covered</span>
+          <span class="rmi-val">10 ZARDIs across Uganda</span>
+        </div>
+        <div class="report-meta-item">
+          <span class="rmi-label">Primary index</span>
+          <span class="rmi-val">SPEI (k = 3)</span>
+        </div>
+        <div class="report-meta-item">
+          <span class="rmi-label">Data source</span>
+          <span class="rmi-val">World Bank CCKP · FAOSTAT · NOAA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="stat-row">
+      <div class="stat-box accent">
+        <div class="stat-number">73</div>
+        <div class="stat-desc">Years of climate data analysed (1950–2023)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" style="color:var(--accent);">10</div>
+        <div class="stat-desc">ZARDIs across Uganda's agro-ecological zones</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" style="color:var(--amber);">~2×</div>
+        <div class="stat-desc">Rise in severe weather event likelihood since the 1980s</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" style="color:var(--coral);">1M+</div>
+        <div class="stat-desc">Ugandan farmers with voluntary parametric insurance coverage</div>
+      </div>
+    </div>
+
+    <!-- SPEI explanation -->
+    <div class="spei-section">
+      <h3 class="subsection-title">The Standardised Precipitation Evapotranspiration Index (SPEI)</h3>
+      <p class="subsection-lead">
+        SPEI captures weather severity as a single comparable number by subtracting Potential Evapotranspiration (PET) from rainfall — measuring how thirsty the soil actually is, not just how much rain fell. A timescale of k=3 months is used here, making it suitable for monitoring soil moisture and crop yield. Because it is a standardised normal variable (mean 0, SD 1), its values are directly comparable across all ten regions.
+      </p>
+      <table class="spei-table">
+        <thead>
+          <tr>
+            <th>SPEI value</th>
+            <th>Category</th>
+            <th>Agricultural risk profile</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>≥ 2.0</code></td>
+            <td><span class="spei-chip chip-ewet">Extremely wet</span></td>
+            <td>High risk of flooding; severe soil saturation; crop rot</td>
+          </tr>
+          <tr>
+            <td><code>1.50 – 1.99</code></td>
+            <td><span class="spei-chip chip-swet">Severely wet</span></td>
+            <td>Drainage issues; infrastructure stress; moderate flood risk</td>
+          </tr>
+          <tr>
+            <td><code>1.00 – 1.49</code></td>
+            <td><span class="spei-chip chip-mwet">Moderately wet</span></td>
+            <td>Favourable for water replenishment; low moisture risk</td>
+          </tr>
+          <tr>
+            <td><code>−0.99 – 0.99</code></td>
+            <td><span class="spei-chip chip-norm">Near normal</span></td>
+            <td>Standard conditions; minimal moisture-related risk</td>
+          </tr>
+          <tr>
+            <td><code>−1.49 – −1.00</code></td>
+            <td><span class="spei-chip chip-mdry">Moderate drought</span></td>
+            <td>Initial moisture stress; potential crop yield reduction</td>
+          </tr>
+          <tr>
+            <td><code>−1.99 – −1.50</code></td>
+            <td><span class="spei-chip chip-sdry">Severe drought</span></td>
+            <td>Significant water shortages; likely agricultural damage</td>
+          </tr>
+          <tr>
+            <td><code>≤ −2.0</code></td>
+            <td><span class="spei-chip chip-edry">Extreme drought</span></td>
+            <td>Severe water deficits; high risk of total crop failure</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Key findings -->
+    <div class="spei-section">
+      <h3 class="subsection-title">Key findings</h3>
+      <p class="subsection-lead">Three overarching conclusions emerge from the 73-year record, each with direct implications for insurance product design and agricultural policy.</p>
+      <div class="findings-grid">
+        <div class="finding-card featured">
+          <div class="finding-num">01 — Primary finding</div>
+          <div class="finding-title">Uganda has shifted from drought-dominated to extreme-wetness-dominated</div>
+          <div class="finding-body">Between 1950 and 1980, the MAM season displayed 5–9 drought events per decade per ZARDI. From 2000 onwards, extreme wetness events have become more frequent, reaching 5–10 events per ZARDI. The 2020s have only four recorded years, and more than 50% of MAM seasons already exhibit extreme wetness. The risk of crop loss from waterlogging is now the primary threat in the modern MAM era.</div>
+        </div>
+        <div class="finding-card">
+          <div class="finding-num">02</div>
+          <div class="finding-title">The shift is spatially asymmetric</div>
+          <div class="finding-body">Eastern and central ZARDIs face rapidly expanding dual-peril exposure (both drought and flood). Northern zones retain a primarily drought-based risk profile. This asymmetry makes national-level uniform insurance pricing both financially unsound and inequitable.</div>
+        </div>
+        <div class="finding-card">
+          <div class="finding-num">03</div>
+          <div class="finding-title">The Indian Ocean Dipole is a robust pre-season signal</div>
+          <div class="finding-body">Pure negative IOD phases show statistically significant correlations with SPEI across all ten ZARDIs in both JJA and MAM seasons. This makes IOD observable data from NOAA and the Australian Bureau of Meteorology a viable conditioning variable for parametric trigger calibration three to six months before planting season begins.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENSO and IOD -->
+    <div class="spei-section">
+      <h3 class="subsection-title">ENSO and IOD — climate drivers of Ugandan rainfall</h3>
+      <p class="subsection-lead">Two large-scale oceanic phenomena drive Uganda's most severe agricultural weather events. Understanding their interaction is essential for forward-looking insurance design.</p>
+      <div class="enso-grid">
+        <div class="enso-card">
+          <div class="enso-title">El Niño / La Niña (ENSO)</div>
+          <div class="enso-body">
+            El Niño warms Pacific surface waters, reversing atmospheric circulation and producing heavier rainfall across Uganda. The 2015–2016 event was record-breaking: all ten ZARDIs crossed SPEI +1.5, and the median SPEI for eastern zones reached 1.0 — meaning even typical conditions during that El Niño were moderately wet. La Niña produces the opposite pattern globally, but Uganda shows a whiplash effect: the 2016–2017 La Niña was anomalously wet, not dry, likely due to residual moisture from the preceding El Niño. ENSO cycles are predicted to become more frequent under climate change.
+          </div>
+        </div>
+        <div class="enso-card">
+          <div class="enso-title">Indian Ocean Dipole (IOD)</div>
+          <div class="enso-body">
+            The IOD measures sea surface temperature anomalies between the eastern and western tropical Indian Ocean. A positive IOD (DMI &gt; 0.4) warms western Indian Ocean waters and produces more rainfall in East Africa. A negative IOD (DMI &lt; −0.4) cools western waters and reduces moisture. Crucially, the analysis found that pure positive IOD phases have no statistically significant relationship with SPEI in Uganda — but when positive IOD coincides with El Niño, strong drying correlations emerge in Mukono and Bulindi. Pure negative IOD phases show significant relationships in 80% of ZARDIs during JJA and all ZARDIs during MAM.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decade volatility -->
+    <div class="spei-section">
+      <h3 class="subsection-title">Decade-by-decade SPEI volatility by ZARDI (%)</h3>
+      <p class="subsection-lead">Volatility measures the proportion of SPEI observations outside the predictable farming zone [−1.5, +1.5]. The 1980s were the most stable decade across all zones. The 2020s already show dangerous increases with only four years of data recorded.</p>
+      <div class="decade-table-wrap">
+        <table class="decade-table">
+          <thead>
+            <tr>
+              <th>ZARDI</th>
+              <th>1950s</th>
+              <th>1960s</th>
+              <th>1970s</th>
+              <th>1980s</th>
+              <th>1990s</th>
+              <th>2000s</th>
+              <th>2010s</th>
+              <th>2020s*</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Abi</td><td>21.0</td><td>29.9</td><td>7.0</td><td class="vol-low">2.0</td><td>6.0</td><td>7.9</td><td>21.4</td><td>18.8</td></tr>
+            <tr><td>Buginyanya</td><td>20.3</td><td>17.3</td><td>11.4</td><td class="vol-low">2.2</td><td>7.7</td><td>11.7</td><td>17.4</td><td class="vol-high">20.6</td></tr>
+            <tr><td>Bulindi</td><td>19.5</td><td>19.0</td><td>12.7</td><td class="vol-low">1.5</td><td>6.5</td><td>10.2</td><td>19.8</td><td class="vol-high">31.7</td></tr>
+            <tr><td>Kachwekano</td><td>19.3</td><td>16.9</td><td>12.1</td><td>6.5</td><td>14.2</td><td>14.6</td><td>15.2</td><td class="vol-low">7.3</td></tr>
+            <tr><td>Mbarara</td><td>15.6</td><td>19.2</td><td>18.0</td><td class="vol-low">2.2</td><td>5.8</td><td>15.0</td><td>18.3</td><td>13.9</td></tr>
+            <tr><td>Mukono</td><td>17.6</td><td>18.8</td><td>11.9</td><td class="vol-low">2.6</td><td>3.8</td><td>11.8</td><td>18.4</td><td class="vol-peak">39.0</td></tr>
+            <tr><td>Nabuin</td><td>20.5</td><td>18.1</td><td>8.1</td><td class="vol-low">4.0</td><td>13.6</td><td>13.0</td><td>12.8</td><td class="vol-high">24.7</td></tr>
+            <tr><td>Ngetta</td><td>20.8</td><td>25.0</td><td>11.0</td><td class="vol-low">1.4</td><td>9.4</td><td>11.6</td><td>17.7</td><td>20.1</td></tr>
+            <tr><td>Rwebitaba</td><td>16.2</td><td>17.7</td><td>14.9</td><td class="vol-low">4.9</td><td>7.9</td><td>15.1</td><td>20.7</td><td>13.1</td></tr>
+            <tr><td>Serere</td><td>20.6</td><td>21.1</td><td>11.9</td><td class="vol-low">1.1</td><td>8.1</td><td>11.2</td><td>18.0</td><td>18.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px; color:var(--ink-faint);">* 2020s data is truncated — only 4 out of 10 years recorded at time of analysis. Highlighted in red: highest values. Green: lowest (most stable).</p>
+    </div>
+
+    <!-- ZARDI cards -->
+    <div class="zardi-section">
+      <h3 class="subsection-title">Insurance trigger recommendations by ZARDI</h3>
+      <p class="subsection-lead">Three trigger structures are proposed based on the climate profile of each zone. The dual trigger activates on either SPEI ≥ +1.5 (severe wetness) or SPEI ≤ −1.5 (severe drought), providing protection against Uganda's increasingly volatile dual-peril landscape.</p>
+      <div class="zardi-grid">
+
+        <div class="zardi-card">
+          <div class="zardi-head">
+            <div><div class="zardi-name">Buginyanya</div><div class="zardi-region">Eastern region</div></div>
+            <span class="trigger-badge badge-dual">Dual trigger</span>
+          </div>
+          <div class="zardi-crops">
+            <strong>Principal crops</strong>
+            Maize, Beans, Arabica Coffee, Highland Potatoes, Plantains
+          </div>
+        </div>
+
+        <div class="zardi-card">
+          <div class="zardi-head">
+            <div><div class="zardi-name">Mukono</div><div class="zardi-region">Central region</div></div>
+            <span class="trigger-badge badge-dual">Dual trigger</span>
+          </div>
+          <div class="zardi-crops">
+            <strong>Principal crops</strong>
+            Robusta Coffee, Bananas, Cocoa
+          </div>
+        </div>
+
+        <div class="zardi-card">
+          <div class="zardi-head">
+            <div><div class="zardi-name">Bulindi</div><div class="zardi-region">Bunyoro region</div></div>
+            <span class="trigger-badge badge-dual">Dual trigger</span>
+          </div>
+          <div class="zardi-crops">
+            <strong>Principal crops</strong>
+            Maize, Beans, Soybeans, Rice
+          </div>
+        </div>
+
+        <div class="zardi-card">
+          <div class="zardi-head">
+            <div><div class="zardi-name">Serere</div><div class="zardi-region">Teso region</div></div>
+            <span class="trigger-badge badge-dual">Dual trigger</span>
+          </div>
+          <div class="zardi-crops">
+            <strong>Principal crops</strong>
+            Maize, Millet, Sorghum, Beans, Soybeans, Cassava
+          </div>
+        </div>
+
+        <div class="zardi-card">
+          <div class="zardi-head">
+            <div><div class="zardi-name">Nabuin</div><div class="zardi-region">Karamoja region</div></div>
+            <span class="trigger-badge badge-drought">Drought trigger</span>
+          </div>
+          <div class="zardi-crops">
+            <strong>Principal crops</strong>
+            Sorghum, Pearl Millet, Sunflower, Mung Beans
+          </div>
+        </div>
+
+        <div class="zardi-card">
+          <div class="zardi-head">
+            <div><div class="zardi-name">Ngetta</div><div class="zardi-region">Lango region</div></div>
+            <span class="trigger-badge badge-drought">Drought trigger</span>
+          </div>
+          <div class="zardi-crops">
+            <strong>Principal crops</strong>
+            Sunflower, Soybeans, Simsim, Cassava, Rice
+          </div>
+        </div>
+
+        <div class="zardi-card">
+          <div class="zardi-head">
+            <div><div class="zardi-name">Abi</div><div class="zardi-region">West Nile region</div></div>
+            <span class="trigger-badge badge-drought">Drought trigger</span>
+          </div>
+          <div class="zardi-crops">
+            <strong>Principal crops</strong>
+            Sorghum, Finger Millet, Cassava, Groundnuts
+          </div>
+        </div>
+
+        <div class="zardi-card">
+          <div class="zardi-head">
+            <div><div class="zardi-name">Mbarara</div><div class="zardi-region">Ankole region</div></div>
+            <span class="trigger-badge badge-wetness">Wetness trigger</span>
+          </div>
+          <div class="zardi-crops">
+            <strong>Principal crops</strong>
+            Bananas (Matooke), Beans, Coffee
+          </div>
+        </div>
+
+        <div class="zardi-card">
+          <div class="zardi-head">
+            <div><div class="zardi-name">Kachwekano</div><div class="zardi-region">Kigezi region</div></div>
+            <span class="trigger-badge badge-wetness">Wetness trigger</span>
+          </div>
+          <div class="zardi-crops">
+            <strong>Principal crops</strong>
+            Irish Potatoes, Temperate Fruits, Barley, Wheat
+          </div>
+        </div>
+
+        <div class="zardi-card">
+          <div class="zardi-head">
+            <div><div class="zardi-name">Rwebitaba</div><div class="zardi-region">Tooro region</div></div>
+            <span class="trigger-badge badge-wetness">Wetness trigger</span>
+          </div>
+          <div class="zardi-crops">
+            <strong>Principal crops</strong>
+            Tea, Coffee, Bananas, Cocoa
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Insurance design -->
+    <div class="spei-section">
+      <h3 class="subsection-title">Insurance trigger structures</h3>
+      <p class="subsection-lead">Parametric insurance pays out when an objective index crosses a predefined threshold — no field visit or loss adjustment required. Three structures are proposed, each suited to different ZARDI risk profiles.</p>
+      <div class="insurance-grid">
+        <div class="ins-card">
+          <div class="ins-icon icon-wet">💧</div>
+          <div class="ins-title">Wetness trigger</div>
+          <div class="ins-trigger">SPEI ≥ +1.5</div>
+          <div class="ins-body">Activated when sustained excess moisture signals severe waterlogging risk. Most appropriate for western ZARDIs with increasing median SPEI drift — Mbarara and Kachwekano. Payout compensates for crop rot, soil saturation, and infrastructure damage during anomalously wet periods.</div>
+        </div>
+        <div class="ins-card">
+          <div class="ins-icon icon-dry">🌵</div>
+          <div class="ins-title">Drought trigger</div>
+          <div class="ins-trigger">SPEI ≤ −1.5</div>
+          <div class="ins-body">Activated when prolonged moisture deficits threaten crop failure. Most appropriate for northern zones — Nabuin, Ngetta, Abi — where delayed or failed rainfall onset has a statistically significant decreasing trend. Nabuin is particularly high-risk: its unimodal rainfall means there is no fallback season.</div>
+        </div>
+        <div class="ins-card">
+          <div class="ins-icon icon-dual">⚡</div>
+          <div class="ins-title">Dual trigger</div>
+          <div class="ins-trigger">SPEI ≥ +1.5 or ≤ −1.5</div>
+          <div class="ins-body">Responds to either extreme. Essential for eastern and central ZARDIs — Buginyanya, Mukono, Bulindi, Serere — where the same decade can produce both the wettest and driest conditions on record. A drought-only or wetness-only product would leave these farmers exposed to half their risk.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommendations -->
+    <div class="spei-section">
+      <h3 class="subsection-title">Policy and institutional recommendations</h3>
+      <p class="subsection-lead">Three actionable steps for government, insurers, and development finance partners — designed for immediate implementation with existing infrastructure.</p>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R1</span>
+          <div>
+            <div class="rec-title">Establish a National Agricultural Climate Risk Registry</div>
+            <div class="rec-body">A joint initiative between the Ministry of Finance, MAAIF, UBOS, and the Uganda Meteorology Authority should record SPEI anomalies, ENSO and IOD event classifications, and crop yield data at the ZARDI level annually. This centralised registry would serve as a shared foundation for insurance pricing, disaster response, and development finance — reducing the cost of fragmented responses to the same risks.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R2</span>
+          <div>
+            <div class="rec-title">Formally adopt SPEI as Uganda's standard agricultural insurance index</div>
+            <div class="rec-body">The Uganda Insurers Association, in collaboration with MAAIF, should supersede single-variable rainfall thresholds with SPEI. Rainfall-only triggers would not activate during a drought driven by heat stress despite normal rainfall — leaving farmers underinsured. SPEI's standardised properties mean it is statistically consistent across all ZARDIs regardless of differing baseline rainfall, making cross-portfolio pricing manageable.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R3</span>
+          <div>
+            <div class="rec-title">Integrate IOD and ENSO signals into seasonal agricultural advisory</div>
+            <div class="rec-body">ICPAC, NOAA, and the Australian Bureau of Meteorology publish probabilistic IOD and ENSO forecasts between June and August — three to six months before the MAM long rains. These forecasts should be propagated into ZARDI-level planting guidance distributed to farmers, with explicit reference to the risk elevations documented in this report.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-left">
+        <p>
+          Jonathan is actively seeking analytical roles in insurance, climate risk, development finance, or data science. He brings actuarial training, hands-on parametric insurance experience, and a deep understanding of East African climate systems.
+        </p>
+        <p>
+          If you are working on problems at the intersection of climate, data, and sustainable development in Uganda or East Africa — or simply want to talk about the research — he would like to hear from you.
+        </p>
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/jonathan-khabusi-5989b917a/" target="_blank" rel="noopener" class="contact-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn — Jonathan Khabusi
+          </a>
+          <a href="https://github.com/jojosisa" target="_blank" rel="noopener" class="contact-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            GitHub — jojosisa
+          </a>
+        </div>
+      </div>
+      <div class="contact-right">
+        <blockquote>
+          "He currently works within the food industry as a Lead Barista, testing his patience with different customers and having a laugh with his colleagues. At the moment, he would like a seat at the Corporate Table."
+        </blockquote>
+        <div class="quote-attr">— Jonathan Sisa Khabusi, 2024</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Jonathan Sisa Khabusi</div>
+    <div>
+      <a href="https://www.linkedin.com/in/jonathan-khabusi-5989b917a/" target="_blank" rel="noopener">LinkedIn</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/jojosisa" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div>Kampala, Uganda · 2026</div>
+  </footer>
+
+</body>
+</html>
