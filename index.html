@@ -319,7 +319,7 @@
       color: var(--ink-muted);
       line-height: 1.7;
       margin-bottom: 1.5rem;
-      max-width: 640px;
+      max-width: 100%;
     }
     .spei-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
     .spei-table th {
@@ -483,7 +483,56 @@
     .vol-low  { color: var(--accent); }
     .vol-high { color: var(--coral); font-weight: 500; }
     .vol-peak { background: var(--coral-light) !important; color: var(--coral); font-weight: 700; }
+    
+    /* ── EXTREME EVENTS TABLE ── */
+    .extreme-table td { text-align: center; font-variant-numeric: tabular-nums; }
+    .extreme-table td:first-child { text-align: left; font-weight: 500; }
+    /* ── DRY COLUMNS (Pairs: 2 & 3, 6 & 7, 10 & 11...) ── */
+    /* Catches column 2, 6, 10... */
+    .extreme-table tbody td:nth-child(4n-2) { background: var(--coral-light); color: var(--coral); font-weight: 600; }
+    /* Catches column 3, 7, 11... */
+    .extreme-table tbody td:nth-child(4n-1) { background: var(--coral-light); color: var(--coral); font-weight: 600; }
 
+    /* ── WET COLUMNS (Pairs: 4 & 5, 8 & 9, 12 & 13...) ── */
+    /* Catches column 4, 8, 12... */
+    .extreme-table tbody td:nth-child(4n) { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+    /* Catches column 5, 9, 13... */
+    .extreme-table tbody td:nth-child(4n+1) { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+    /* Protects the 1st column (ZARDI Names) from being overwritten by the 2n+1 rule */
+    .extreme-table tbody td:first-child { background: transparent; color: inherit; font-weight: 500; }
+
+    /* Protects the header rows from getting the column background colors */
+    .extreme-table thead th { background: var(--surface-muted); color: var(--ink); font-weight: 600; } 
+    .legend-item { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--ink-muted); }
+    .legend-swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+    .swatch-dry { background: var(--coral-light); border: 1px solid var(--coral); }
+    .swatch-wet { background: var(--accent-light); border: 1px solid var(--accent-mid); }
+    
+    .extreme-callout {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-top: 0.5rem;
+    }
+    .callout-divider { background: var(--border); }
+    .callout-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 6px;
+    }
+    .callout-body { font-size: 14px; color: var(--ink-muted); line-height: 1.65; }
+
+    @media (max-width: 700px) {
+      .extreme-callout { grid-template-columns: 1fr; }
+      .callout-divider { display: none; }
+    }
     /* Insurance design */
     .insurance-grid {
       display: grid;
@@ -623,6 +672,9 @@
       .zardi-grid { grid-template-columns: 1fr; }
       .stat-row { grid-template-columns: 1fr 1fr; }
     }
+
+      .nav-download { color: var(--accent) !important; font-weight: 500 !important; border: 1px solid var(--accent-light); padding: 4px 10px; border-radius: var(--radius); transition: background 0.15s; } 
+      .nav-download:hover { background: var(--accent-light); }
   </style>
 </head>
 <body>
@@ -634,6 +686,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#report">Research</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li> <a href="Data_Analysis_Report.docx" download class="nav-download"> ↓ Download report </a> </li>
     </ul>
   </nav>
 
@@ -647,6 +700,7 @@
       </p>
       <div class="hero-cta-row">
         <a href="#report" class="btn btn-primary">Read the research</a>
+        <a href="Data_Analysis_Report.docx" download class="btn btn-outline">↓ Download report</a>
         <a href="#contact" class="btn btn-outline">Get in touch</a>
       </div>
     </div>
@@ -657,7 +711,7 @@
       </div>
       <div class="fact-card">
         <div class="fact-label">Experience</div>
-        <div class="fact-value">MX Underwriting, transactional real estate insurance</div>
+        <div class="fact-value">MX Underwriting — Transactional real estate insurance</div>
       </div>
       <div class="fact-card">
         <div class="fact-label">Research focus</div>
@@ -939,7 +993,107 @@
       </div>
       <p style="font-size:12px; color:var(--ink-faint);">* 2020s data is truncated — only 4 out of 10 years recorded at time of analysis. Highlighted in red: highest values. Green: lowest (most stable).</p>
     </div>
+    <!-- SEASONAL RISK OF EXTREME EVENTS -->
+    <div class="spei-section">
+      <h3 class="subsection-title">Seasonal risk of extreme events</h3>
+      <p class="subsection-lead">
+        Using aggregated monthly SPEI values per ZARDI, a running cumulative sum detects whether conditions have crossed the extreme thresholds of +2.0 (extreme wetness) or −2.0 (extreme drought) and remained there for at least three consecutive months. The table below shows the number of such confirmed extreme seasonal anomalies per ZARDI per decade, split by season (M = MAM long rains, S = SON short rains) and peril (Dry / Wet). The 2020s reflect truncated data — four out of ten years recorded.
+      </p>
 
+      <div class="decade-table-wrap">
+        <table class="decade-table extreme-table">
+          <thead>
+            <tr>
+              <th rowspan="3">ZARDI</th>
+              <th colspan="4">1950s</th>
+              <th colspan="4">1960s</th>
+              <th colspan="4">1970s</th>
+              <th colspan="4">1980s</th>
+            </tr>
+            <tr>
+              <th colspan="2">Dry</th><th colspan="2">Wet</th>
+              <th colspan="2">Dry</th><th colspan="2">Wet</th>
+              <th colspan="2">Dry</th><th colspan="2">Wet</th>
+              <th colspan="2">Dry</th><th colspan="2">Wet</th>
+            </tr>
+            <tr>
+              <th>M</th><th>S</th><th>M</th><th>S</th>
+              <th>M</th><th>S</th><th>M</th><th>S</th>
+              <th>M</th><th>S</th><th>M</th><th>S</th>
+              <th>M</th><th>S</th><th>M</th><th>S</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Abi</td>        <td class="ext-dry">9</td><td class="ext-dry">4</td><td>0</td><td>0</td>  <td class="ext-dry">6</td><td class="ext-dry">3</td><td>0</td><td>0</td>  <td class="ext-dry">6</td><td class="ext-dry">3</td><td>0</td><td>1</td>  <td>2</td><td>1</td><td>2</td><td>1</td></tr>
+            <tr><td>Buginyanya</td> <td class="ext-dry">5</td><td>1</td><td>0</td><td>1</td>             <td class="ext-dry">6</td><td class="ext-dry">3</td><td>0</td><td>0</td>  <td class="ext-dry">4</td><td class="ext-dry">4</td><td>0</td><td>0</td>  <td>3</td><td>1</td><td>1</td><td>0</td></tr>
+            <tr><td>Bulindi</td>    <td class="ext-dry">7</td><td>1</td><td>0</td><td>0</td>             <td class="ext-dry">6</td><td class="ext-dry">4</td><td>0</td><td>0</td>  <td class="ext-dry">6</td><td class="ext-dry">5</td><td>0</td><td>0</td>  <td>3</td><td>2</td><td>2</td><td>0</td></tr>
+            <tr><td>Kachwekano</td> <td class="ext-dry">7</td><td>0</td><td>0</td><td>1</td>             <td class="ext-dry">7</td><td>2</td><td>0</td><td>1</td>                 <td class="ext-dry">8</td><td class="ext-dry">3</td><td>0</td><td>1</td>  <td>2</td><td>1</td><td>2</td><td>0</td></tr>
+            <tr><td>Mbarara</td>    <td class="ext-dry">8</td><td>0</td><td>0</td><td>0</td>             <td class="ext-dry">7</td><td class="ext-dry">3</td><td>0</td><td>0</td>  <td class="ext-dry">8</td><td class="ext-dry">4</td><td>0</td><td>0</td>  <td>3</td><td>1</td><td>3</td><td>0</td></tr>
+            <tr><td>Mukono</td>     <td class="ext-dry">8</td><td>1</td><td>0</td><td>0</td>             <td class="ext-dry">7</td><td>2</td><td>0</td><td>0</td>                 <td class="ext-dry">7</td><td class="ext-dry">4</td><td>0</td><td>0</td>  <td>3</td><td>1</td><td>1</td><td>0</td></tr>
+            <tr><td>Nabuin</td>     <td class="ext-dry">8</td><td class="ext-dry">3</td><td>0</td><td>0</td>  <td class="ext-dry">6</td><td>1</td><td>0</td><td>0</td>             <td class="ext-dry">4</td><td>2</td><td>1</td><td>0</td>                 <td>1</td><td>1</td><td>1</td><td>2</td></tr>
+            <tr><td>Ngetta</td>     <td class="ext-dry">8</td><td>1</td><td>0</td><td>0</td>             <td class="ext-dry">7</td><td class="ext-dry">3</td><td>0</td><td>0</td>  <td class="ext-dry">6</td><td class="ext-dry">3</td><td>0</td><td>1</td>  <td>2</td><td>2</td><td>2</td><td>0</td></tr>
+            <tr><td>Rwebitaba</td>  <td class="ext-dry">6</td><td>0</td><td>0</td><td>0</td>             <td class="ext-dry">7</td><td>2</td><td>0</td><td>1</td>                 <td class="ext-dry">8</td><td class="ext-dry">4</td><td>0</td><td>1</td>  <td>2</td><td>1</td><td>2</td><td>0</td></tr>
+            <tr><td>Serere</td>     <td class="ext-dry">8</td><td>1</td><td>0</td><td>0</td>             <td class="ext-dry">7</td><td class="ext-dry">3</td><td>0</td><td>0</td>  <td class="ext-dry">5</td><td class="ext-dry">3</td><td>0</td><td>0</td>  <td>2</td><td>1</td><td>1</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="decade-table-wrap" style="margin-top: 1px;">
+        <table class="decade-table extreme-table">
+          <thead>
+            <tr>
+              <th rowspan="3">ZARDI</th>
+              <th colspan="4">1990s</th>
+              <th colspan="4">2000s</th>
+              <th colspan="4">2010s</th>
+              <th colspan="4">2020s*</th>
+            </tr>
+            <tr>
+              <th colspan="2">Dry</th><th colspan="2">Wet</th>
+              <th colspan="2">Dry</th><th colspan="2">Wet</th>
+              <th colspan="2">Dry</th><th colspan="2">Wet</th>
+              <th colspan="2">Dry</th><th colspan="2">Wet</th>
+            </tr>
+            <tr>
+              <th>M</th><th>S</th><th>M</th><th>S</th>
+              <th>M</th><th>S</th><th>M</th><th>S</th>
+              <th>M</th><th>S</th><th>M</th><th>S</th>
+              <th>M</th><th>S</th><th>M</th><th>S</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Abi</td>        <td>1</td><td>0</td><td class="ext-wet">4</td><td>1</td>   <td>0</td><td>0</td><td class="ext-wet">9</td><td>2</td>   <td>0</td><td>0</td><td class="ext-wet">7</td><td>2</td>   <td>0</td><td>0</td><td>3</td><td>1</td></tr>
+            <tr><td>Buginyanya</td> <td>1</td><td>0</td><td class="ext-wet">3</td><td>0</td>   <td>0</td><td>0</td><td class="ext-wet">8</td><td>2</td>   <td>1</td><td>0</td><td class="ext-wet">7</td><td>2</td>   <td>1</td><td>0</td><td>3</td><td>0</td></tr>
+            <tr><td>Bulindi</td>    <td>2</td><td>0</td><td class="ext-wet">4</td><td>2</td>   <td>0</td><td>0</td><td class="ext-wet">8</td><td>2</td>   <td>0</td><td>0</td><td class="ext-wet">8</td><td>4</td>   <td>0</td><td>0</td><td>3</td><td>3</td></tr>
+            <tr><td>Kachwekano</td> <td>1</td><td>0</td><td class="ext-wet">4</td><td>1</td>   <td>0</td><td>0</td><td class="ext-wet">7</td><td>3</td>   <td>0</td><td>1</td><td class="ext-wet">8</td><td>1</td>   <td>0</td><td>0</td><td>3</td><td>0</td></tr>
+            <tr><td>Mbarara</td>    <td>1</td><td>0</td><td class="ext-wet">4</td><td>0</td>   <td>0</td><td>0</td><td class="ext-wet">10</td><td>4</td>  <td>0</td><td>1</td><td class="ext-wet">8</td><td>3</td>   <td>0</td><td>0</td><td>2</td><td>1</td></tr>
+            <tr><td>Mukono</td>     <td>2</td><td>0</td><td class="ext-wet">3</td><td>0</td>   <td>0</td><td>0</td><td class="ext-wet">9</td><td>2</td>   <td>0</td><td>0</td><td class="ext-wet">8</td><td>2</td>   <td>0</td><td>0</td><td>3</td><td>3</td></tr>
+            <tr><td>Nabuin</td>     <td>1</td><td>1</td><td class="ext-wet">5</td><td>2</td>   <td>0</td><td>0</td><td class="ext-wet">6</td><td>2</td>   <td>2</td><td>0</td><td class="ext-wet">5</td><td>1</td>   <td>1</td><td>1</td><td>3</td><td>1</td></tr>
+            <tr><td>Ngetta</td>     <td>2</td><td>0</td><td class="ext-wet">4</td><td>1</td>   <td>0</td><td>0</td><td class="ext-wet">8</td><td>2</td>   <td>1</td><td>0</td><td class="ext-wet">7</td><td>3</td>   <td>0</td><td>0</td><td>3</td><td>1</td></tr>
+            <tr><td>Rwebitaba</td>  <td>2</td><td>0</td><td class="ext-wet">4</td><td>1</td>   <td>0</td><td>0</td><td class="ext-wet">8</td><td>2</td>   <td>0</td><td>1</td><td class="ext-wet">8</td><td>1</td>   <td>0</td><td>1</td><td>2</td><td>1</td></tr>
+            <tr><td>Serere</td>     <td>2</td><td>1</td><td class="ext-wet">4</td><td>1</td>   <td>0</td><td>0</td><td class="ext-wet">8</td><td>2</td>   <td>1</td><td>0</td><td class="ext-wet">7</td><td>2</td>   <td>0</td><td>0</td><td>3</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="extreme-legend">
+        <div class="legend-item"><span class="legend-swatch swatch-dry"></span> High drought frequency</div>
+        <div class="legend-item"><span class="legend-swatch swatch-wet"></span> High wetness frequency</div>
+        <div class="legend-item" style="color:var(--ink-faint); font-size:12px;">* 2020s: 4 of 10 years recorded &nbsp;·&nbsp; M = MAM season &nbsp;·&nbsp; S = SON season</div>
+      </div>
+
+      <div class="extreme-callout">
+        <div class="callout-item">
+          <div class="callout-label">Pre-2000 pattern</div>
+          <div class="callout-body">Drought-dominated. Each ZARDI recorded 5–9 MAM dry events per decade from 1950 to 1980. Wet events were near zero across the board.</div>
+        </div>
+        <div class="callout-divider"></div>
+        <div class="callout-item">
+          <div class="callout-label">Post-2000 shift</div>
+          <div class="callout-body">Wetness-dominated. Extreme MAM wet events now reach 5–10 per ZARDI per decade. Abi, Mbarara, Bulindi, and Mukono are most exposed. SON events remain less intense throughout the full period.</div>
+        </div>
+      </div>
+    </div>
     <!-- ZARDI cards -->
     <div class="zardi-section">
       <h3 class="subsection-title">Insurance trigger recommendations by ZARDI</h3>
