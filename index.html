@@ -480,8 +480,8 @@
     }
     .decade-table td:first-child { text-align: left; font-weight: 500; }
     .decade-table tr:hover td { background: var(--bg); }
-    .vol-low  { color: var(--accent); }
-    .vol-high { color: var(--coral); font-weight: 500; }
+    .vol-low  { background: var(--accent-light);color: var(--accent); }
+    .vol-high { background: var(--coral-light); color: var(--coral); font-weight: 500; }
     .vol-peak { background: var(--coral-light) !important; color: var(--coral); font-weight: 700; }
     
     /* ── EXTREME EVENTS TABLE ── */
@@ -675,6 +675,56 @@
 
       .nav-download { color: var(--accent) !important; font-weight: 500 !important; border: 1px solid var(--accent-light); padding: 4px 10px; border-radius: var(--radius); transition: background 0.15s; } 
       .nav-download:hover { background: var(--accent-light); }
+
+    /* Contact Form Specific Styling */
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      font-family: var(--sans);
+      font-size: 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--ink);
+      transition: border-color 0.15s;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent-mid);
+    }
+    .form-error-msg {
+      color: var(--coral);
+      font-size: 12px;
+      margin-top: 4px;
+      display: block;
+    }
+    .form-status {
+      padding: 1rem;
+      border-radius: var(--radius);
+      font-size: 14px;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+    .status-success {
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid rgba(45, 106, 79, 0.2);
+    }
+    .status-error {
+      background: var(--coral-light);
+      color: var(--coral);
+      border: 1px solid rgba(192, 57, 43, 0.2);
+    }  
   </style>
 </head>
 <body>
@@ -715,7 +765,7 @@
       </div>
       <div class="fact-card">
         <div class="fact-label">Research focus</div>
-        <div class="fact-value">Climate risk in Ugandan smallholder agriculture — Relations between SPEI, ENSO, and IOD</div>
+        <div class="fact-value">Climate risk in smallholder agriculture — Relations between SPEI, ENSO, and IOD</div>
       </div>
       <div class="fact-card">
         <div class="fact-label">Based in</div>
@@ -746,13 +796,6 @@
       <div>
         <ul class="timeline">
           <li class="tl-item">
-            <span class="tl-year">2012–16</span>
-            <div class="tl-content">
-              <div class="tl-title">St. Henry's College Kitovu</div>
-              <div class="tl-sub">Uganda Certificate of Education — Grade 13 in 8.</div>
-            </div>
-          </li>
-          <li class="tl-item">
             <span class="tl-year">2016–18</span>
             <div class="tl-content">
               <div class="tl-title">King's College Budo</div>
@@ -763,7 +806,7 @@
             <span class="tl-year">2019–23</span>
             <div class="tl-content">
               <div class="tl-title">University of Leeds</div>
-              <div class="tl-sub">BSc Actuarial Mathematics, 2:1. Leeds, UK.</div>
+              <div class="tl-sub">BSc Actuarial Mathematics — Second Class Honours (Upper Division).</div>
             </div>
           </li>
           <li class="tl-item">
@@ -776,7 +819,7 @@
           <li class="tl-item">
             <span class="tl-year">2023</span>
             <div class="tl-content">
-              <div class="tl-title">Graduate research (African climate change)</div>
+              <div class="tl-title">Academic research (African climate change)</div>
               <div class="tl-sub">Comparative analysis of Present and Future Combinations of Hazards in Niger.</div>
             </div>
           </li>
@@ -784,7 +827,7 @@
             <span class="tl-year">2025–</span>
             <div class="tl-content">
               <div class="tl-title">Independent researcher</div>
-              <div class="tl-sub">Ugandan climate risk and agricultural insurance.</div>
+              <div class="tl-sub">Climate risk and indices for parametric insurance in Uganda.</div>
             </div>
           </li>
         </ul>
@@ -825,10 +868,6 @@
         <div class="report-meta-item">
           <span class="rmi-label">Data period</span>
           <span class="rmi-val">1950 – 2023</span>
-        </div>
-        <div class="report-meta-item">
-          <span class="rmi-label">Regions covered</span>
-          <span class="rmi-val">10 ZARDIs</span>
         </div>
         <div class="report-meta-item">
           <span class="rmi-label">Primary index</span>
@@ -978,21 +1017,22 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>Abi</td><td>21.0</td><td>29.9</td><td>7.0</td><td class="vol-low">2.0</td><td>6.0</td><td>7.9</td><td>21.4</td><td>18.8</td></tr>
-            <tr><td>Buginyanya</td><td>20.3</td><td>17.3</td><td>11.4</td><td class="vol-low">2.2</td><td>7.7</td><td>11.7</td><td>17.4</td><td class="vol-high">20.6</td></tr>
-            <tr><td>Bulindi</td><td>19.5</td><td>19.0</td><td>12.7</td><td class="vol-low">1.5</td><td>6.5</td><td>10.2</td><td>19.8</td><td class="vol-high">31.7</td></tr>
-            <tr><td>Kachwekano</td><td>19.3</td><td>16.9</td><td>12.1</td><td>6.5</td><td>14.2</td><td>14.6</td><td>15.2</td><td class="vol-low">7.3</td></tr>
-            <tr><td>Mbarara</td><td>15.6</td><td>19.2</td><td>18.0</td><td class="vol-low">2.2</td><td>5.8</td><td>15.0</td><td>18.3</td><td>13.9</td></tr>
-            <tr><td>Mukono</td><td>17.6</td><td>18.8</td><td>11.9</td><td class="vol-low">2.6</td><td>3.8</td><td>11.8</td><td>18.4</td><td class="vol-peak">39.0</td></tr>
-            <tr><td>Nabuin</td><td>20.5</td><td>18.1</td><td>8.1</td><td class="vol-low">4.0</td><td>13.6</td><td>13.0</td><td>12.8</td><td class="vol-high">24.7</td></tr>
-            <tr><td>Ngetta</td><td>20.8</td><td>25.0</td><td>11.0</td><td class="vol-low">1.4</td><td>9.4</td><td>11.6</td><td>17.7</td><td>20.1</td></tr>
-            <tr><td>Rwebitaba</td><td>16.2</td><td>17.7</td><td>14.9</td><td class="vol-low">4.9</td><td>7.9</td><td>15.1</td><td>20.7</td><td>13.1</td></tr>
-            <tr><td>Serere</td><td>20.6</td><td>21.1</td><td>11.9</td><td class="vol-low">1.1</td><td>8.1</td><td>11.2</td><td>18.0</td><td>18.0</td></tr>
+            <tr><td>Abi</td><td class="vol-high">21.0</td><td class="vol-high" class="vol-high">29.9</td><td class="vol-low">7.0</td><td class="vol-low">2.0</td><td class="vol-low">6.0</td><td class="vol-low">7.9</td><td class="vol-high">21.4</td><td>18.8</td></tr>
+            <tr><td>Buginyanya</td><td class="vol-high">20.3</td><td>17.3</td><td>11.4</td><td class="vol-low">2.2</td><td class="vol-low">7.7</td><td>11.7</td><td>17.4</td><td class="vol-high">20.6</td></tr>
+            <tr><td>Bulindi</td><td>19.5</td><td>19.0</td><td>12.7</td><td class="vol-low">1.5</td><td class="vol-low">6.5</td><td>10.2</td><td>19.8</td><td class="vol-high">31.7</td></tr>
+            <tr><td>Kachwekano</td><td>19.3</td><td>16.9</td><td>12.1</td><td class="vol-low">6.5</td><td>14.2</td><td>14.6</td><td>15.2</td><td class="vol-low">7.3</td></tr>
+            <tr><td>Mbarara</td><td>15.6</td><td>19.2</td><td>18.0</td><td class="vol-low">2.2</td><td class="vol-low">5.8</td><td>15.0</td><td>18.3</td><td>13.9</td></tr>
+            <tr><td>Mukono</td><td>17.6</td><td>18.8</td><td>11.9</td><td class="vol-low">2.6</td><td class="vol-low">3.8</td><td>11.8</td><td>18.4</td><td class="vol-peak">39.0</td></tr>
+            <tr><td>Nabuin</td><td class="vol-high">20.5</td><td>18.1</td><td class="vol-low">8.1</td><td class="vol-low">4.0</td><td>13.6</td><td>13.0</td><td>12.8</td><td class="vol-high">24.7</td></tr>
+            <tr><td>Ngetta</td><td class="vol-high">20.8</td><td class="vol-high">25.0</td><td>11.0</td><td class="vol-low">1.4</td><td class="vol-low">9.4</td><td>11.6</td><td>17.7</td><td class="vol-high">20.1</td></tr>
+            <tr><td>Rwebitaba</td><td>16.2</td><td>17.7</td><td>14.9</td><td class="vol-low">4.9</td><td class="vol-low">7.9</td><td>15.1</td><td class="vol-high">20.7</td><td>13.1</td></tr>
+            <tr><td>Serere</td><td class="vol-high">20.6</td><td class="vol-high">21.1</td><td>11.9</td><td class="vol-low">1.1</td><td class="vol-low">8.1</td><td>11.2</td><td>18.0</td><td>18.0</td></tr>
           </tbody>
         </table>
       </div>
-      <p style="font-size:12px; color:var(--ink-faint);">* 2020s data is truncated — only 4 out of 10 years recorded at time of analysis. Highlighted in red: highest values. Green: lowest (most stable).</p>
+      <p style="font-size:12px; color:var(--ink-faint);">* 2020s data is truncated — only 4 out of 10 years recorded at time of analysis. Highlighted in red: highest values (>20%). Green: More stable (Below 10%).</p>
     </div>
+    
     <!-- SEASONAL RISK OF EXTREME EVENTS -->
     <div class="spei-section">
       <h3 class="subsection-title">Seasonal risk of extreme events</h3>
@@ -1267,7 +1307,104 @@
         </li>
       </ul>
     </div>
+    <!-- Model Design Recommendations -->
+    <div class="spei-section">
+      <h3 class="subsection-title">Dynamic Model Design</h3>
+      <p class="subsection-lead">The previous sections identified historical climatic shifts, seasonal and geographic asymmetries, and correlations with climate drivers (ENSO and IOD) to understand their impact on staple crop yields. The use of historical loss tables or burn rate to determine appropriate pricing is becoming increasingly unreliable due to climate change, and the risk of farmer claims being underpaid or overpaid by insurers will remain unmitigated. To address the increasing unpredictability caused by climate change, this section explores a dynamic model framework that uses SPEI as a responsive, self-updating, and forward-looking trigger.</p>
 
+      <h4 class="layer-title">Layer 1 – Set up the baseline period</h4>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">L1.A</span>
+          <div>
+            <div class="rec-title">Quantile Delta Mapping (QDM) for tail estimation</div>
+            <div class="rec-body">Using the structural break at approximately 2000, QDM harmonises the pre-2000 record onto the post-2000 quantile structure. This produces a full 1950-2023 series, whose extreme quantiles reflect current climate magnitudes rather than the blended 73-year average. This approach assumes that the post-2000s is the more relevant baseline for insurance product pricing; however, the expanding variance through the 2020s creates greater residual uncertainty.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">L1.B</span>
+          <div>
+            <div class="rec-title">Rolling window for annual trigger recalibration</div>
+            <div class="rec-body">Each year, the trigger is recalculated using the most recent 20-25-year window of SPEI data rather than the full historical record to make it self-updating. This track identifies the threshold used as the trigger for the next season.</div>
+          </div>
+        </li>
+      </ul>
+
+      <h4 class="layer-title">Layer 2 – Calculate conditional probabilities</h4>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">L2.A</span>
+          <div>
+            <div class="rec-title">IOD/ENSO conditional probability tables</div>
+            <div class="rec-body">For each ZARDI, season, and climate driver combination, the empirical probability that SPEI crosses the trigger threshold is computed. The output is a table comprising the pre-season risk signals, relevant for Horizon 1.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">L2.B</span>
+          <div>
+            <div class="rec-title">Logistic regression for continuous probability scoring</div>
+            <div class="rec-body">Using lagged climate drivers (DMI observed in JJA and RONI in the prior season), the binary outcome of whether SPEI crosses the trigger threshold in the upcoming MAM or SON season is predicted. This provides continuous probability scoring that scales with the magnitude of the IOD/ENSO signal.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">L2.C</span>
+          <div>
+            <div class="rec-title">Copula modelling for coincident event tails</div>
+            <div class="rec-body">When sample sizes of coincident events are small, a bivariate copula models the joint tail dependence between the DMI and RONI without requiring the full co-occurrence record. Given the expected lower-tail dependence on coinciding climate drivers, a Clayton copula is more appropriate.</div>
+          </div>
+        </li>
+      </ul>
+
+      <h4 class="layer-title">Layer 3 – Forward Risk projection</h4>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">L3.A</span>
+          <div>
+            <div class="rec-title">Horizon 1: Seasonal pre-warning (3-6 months)</div>
+            <div class="rec-body">At the start of JJA each year, the Australian Bureau of Meteorology and NOAA CPC provide respective probabilistic DMI and RONI forecasts, and ICPAC is ingested for the Greater Horn of Africa seasonal outlook. These forecasts are propagated through the conditional probability tables using a weighted average across forecast scenarios, yielding a ZARDI-level trigger probability for the upcoming SON or MAM season. Retrospective validation is available within the existing dataset. For each year, JJA-observed DMI and RONI are used as a proxy for the seasonal forecast. The conditional probability table is applied, and the resulting seasonal outlook is compared to the actual SPEI outcome. This gives a hindcast skill score, like the Brier Skill score, quantifying how much predictive value IOD or ENSO conditioning adds over a climatological baseline.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">L3.B</span>
+          <div>
+            <div class="rec-title">Horizon 2: Monthly in-season monitoring</div>
+            <div class="rec-body">SPEI is updated monthly as new precipitation and temperature data arrive during an active season. An insurer monitors whether the SPEI is trending toward the trigger threshold in real time, and a trajectory-based alert occurs when the current SPEI is in the warning zone. This allows them to assess whether a payout is likely and reduce payout timelines by processing claims before the trigger formally fires. The required data can be sourced from monthly CHIRPS actuals, ERA5-Land, or the World Bank CCKP API updates.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">L3.C</span>
+          <div>
+            <div class="rec-title">Horizon 3: Sub-seasonal crop-stage monitoring</div>
+            <div class="rec-body">Using sub-seasonal forecast products such as CHIRPS-GEFS to monitor SPEI trajectory during agronomically critical growth stages, this horizon helps understand where moisture stress has the greatest impact. However, this requires switching the timescale from 3 to 1 for the SPEI calculations to resolve the 15-day signals of CHIRPS-GEFS. This can aid in preventative payouts for irrigation or early harvest before crop loss occurs.</div>
+          </div>
+        </li>
+      </ul>
+
+      <h4 class="layer-title">Layer 4 – Dynamic Recalibration and Basis Risk Scoring</h4>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">L4.A</span>
+          <div>
+            <div class="rec-title">Rolling event coincidence analysis</div>
+            <div class="rec-body">Building on the static event coincidence analysis, this version re-runs annually as new FAOSTAT yield data and SPEI actual values arrive to check whether triggered years coincide with yield-loss years.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">L4.B</span>
+          <div>
+            <div class="rec-title">Basis risk scoring</div>
+            <div class="rec-body">Type 1 basis risk is where a trigger is met without a significant yield loss, causing the insurer to overpay. Type 2 basis risk is where significant yield loss occurs without a trigger being met, leaving the farmer unprotected.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">L4.C</span>
+          <div>
+            <div class="rec-title">Quantile Regression for trigger boundary uncertainty</div>
+            <div class="rec-body">This gives a confidence band, mitigating the uncertainty that a single threshold would give in a non-stationary climate. This technique is important for regulatory documentation, ensuring robust auditability.</div>
+          </div>
+        </li>
+      </ul>
+  </div>
   </section>
 
   <!-- CONTACT -->
@@ -1283,7 +1420,7 @@
           Jonathan is actively seeking analytical roles in insurance, climate risk, development finance, or data science. He brings actuarial training, hands-on insurance experience, and a deep understanding of East African climate systems.
         </p>
         <p>
-          If you are working on problems at the intersection of climate, data, and sustainable development in Uganda or East Africa — or simply want to talk about the research — he would like to hear from you.
+          If you are working on problems at the intersection of climate, data, and sustainable development — or simply want to talk about the research — he would like to hear from you.
         </p>
         <div class="contact-links">
           <a href="https://www.linkedin.com/in/jonathan-khabusi-5989b917a/" target="_blank" rel="noopener" class="contact-link">
@@ -1297,13 +1434,39 @@
         </div>
       </div>
       <div class="contact-right">
-        <blockquote>
-          "The climate is changing, and so must our approach to agricultural risk management. By leveraging data-driven insights and embracing innovative insurance designs, we can build a more resilient future for our farmers and our nation."
-        </blockquote>
-        <div class="quote-attr">— Jonathan Sisa Khabusi</div>
+        <div id="form-success" class="form-status status-success" style="display: none;">
+          Thank you! Your message has been sent successfully.
+        </div>
+        <div id="form-error" class="form-status status-error" style="display: none;">
+          Oops! There was a problem submitting your form. Please try again.
+        </div>
+
+        <form id="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control" data-fs-field required />
+            <span data-fs-error="name" class="form-error-msg"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" class="form-control" data-fs-field required />
+            <span data-fs-error="email" class="form-error-msg"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" class="form-control" data-fs-field rows="5" required></textarea>
+            <span data-fs-error="message" class="form-error-msg"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" data-fs-submit-btn style="width: 100%; justify-content: center;">Send Message</button>
+        </form>
       </div>
-    </div>
+      </div>
   </section>
+
+  
 
   <!-- FOOTER -->
   <footer>
@@ -1315,6 +1478,25 @@
     </div>
     <div>Kampala, Uganda · 2026</div>
   </footer>
+  
+  <script>
+    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { 
+      formElement: '#contact-form', 
+      formId: 'mpqerkbr',
+      onSuccess: function() {
+        document.getElementById('form-success').style.display = 'block';
+        document.getElementById('form-error').style.display = 'none';
+        document.getElementById('contact-form').reset();
+      },
+      onError: function() {
+        document.getElementById('form-error').style.display = 'block';
+        document.getElementById('form-success').style.display = 'none';
+      }
+    });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+  
 
 </body>
 </html>
