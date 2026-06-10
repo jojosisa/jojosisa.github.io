@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jonathan Sisa Khabusi</title>
+  <title>Jonathan Khabusi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet" />
@@ -731,7 +731,7 @@
 
   <!-- NAVIGATION -->
   <nav>
-    <a href="#" class="nav-brand">Jonathan Sisa Khabusi</a>
+    <a href="#" class="nav-brand">Jonathan Khabusi</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#report">Research</a></li>
@@ -859,7 +859,7 @@
       <div class="report-meta-card">
         <div class="report-meta-item">
           <span class="rmi-label">Author</span>
-          <span class="rmi-val">Jonathan Sisa Khabusi</span>
+          <span class="rmi-val">Jonathan Khabusi</span>
         </div>
         <div class="report-meta-item">
           <span class="rmi-label">Date</span>
@@ -904,7 +904,7 @@
     <div class="spei-section">
       <h3 class="subsection-title">The Standardised Precipitation Evapotranspiration Index (SPEI)</h3>
       <p class="subsection-lead">
-        SPEI captures weather severity as a single comparable number by subtracting Potential Evapotranspiration (PET) from rainfall — measuring how thirsty the soil actually is, not just how much rain fell. A timescale of k=3 months is used here, making it suitable for monitoring soil moisture and crop yield. Because it is a standardised normal variable (mean 0, SD 1), its values are directly comparable across all ten regions.
+        SPEI captures weather severity as a single comparable number by subtracting Potential Evapotranspiration (PET) from rainfall, measuring how thirsty the soil actually is, not just how much rain fell. A timescale of k=3 months is used here, making it suitable for monitoring soil moisture and crop yield. Because it is a standardised normal variable (mean 0, SD 1), its values are directly comparable across all ten regions.
       </p>
       <table class="spei-table">
         <thead>
@@ -928,7 +928,7 @@
           <tr>
             <td><code>+1.00 to +1.49</code></td>
             <td><span class="spei-chip chip-mwet">Moderately wet</span></td>
-            <td>Favourable for water replenishment; low moisture risk</td>
+            <td>Favourable for water replenishment; low flood risk</td>
           </tr>
           <tr>
             <td><code>−0.99 to +0.99</code></td>
@@ -974,24 +974,34 @@
           <div class="finding-title">The Indian Ocean Dipole is a robust pre-season signal</div>
           <div class="finding-body">Pure negative IOD phases show statistically significant correlations with SPEI across all ten ZARDIs in both JJA and MAM seasons. This makes IOD observable data from NOAA and the Australian Bureau of Meteorology a viable conditioning variable for parametric trigger calibration three to six months before planting season begins.</div>
         </div>
+        <div class="finding-card">
+          <div class="finding-num">04</div>
+          <div class="finding-title">Coincident El Niño and positive IOD phases trigger flood risk</div>
+          <div class="finding-body">When a strong El Niño aligns with a positive Indian Ocean Dipole phase, the conditional probability of extreme wetness during the MAM season rises for eastern and lake-basin ZARDIs, indicating windows for preemptive risk mitigation.</div>
+        </div>
+        <div class="finding-card">
+          <div class="finding-num">05</div>
+          <div class="finding-title">Maize exhibits the highest exposure to SPEI volatility; Plantains remain resilient</div>
+          <div class="finding-body">Maize production coincides the most with severe countrywide weather events. Conversely, perennial crops like plantains show high resilience to single-season anomalies, demonstrating that location-specific crop profiles are crucial for maximising yield stability.</div>
+        </div>
       </div>
     </div>
 
     <!-- ENSO and IOD -->
     <div class="spei-section">
-      <h3 class="subsection-title">ENSO and IOD — climate drivers of Ugandan rainfall</h3>
+      <h3 class="subsection-title">ENSO and IOD — Climate drivers of Ugandan rainfall</h3>
       <p class="subsection-lead">Two large-scale oceanic phenomena drive Uganda's most severe agricultural weather events. Understanding their interaction is essential for forward-looking insurance design.</p>
       <div class="enso-grid">
         <div class="enso-card">
           <div class="enso-title">El Niño / La Niña (ENSO)</div>
           <div class="enso-body">
-            El Niño warms Pacific surface waters, reversing atmospheric circulation and producing heavier rainfall across Uganda. The 2015–2016 event was record-breaking: all ten ZARDIs crossed SPEI +1.5, and the median SPEI for eastern zones reached 1.0 — meaning even typical conditions during that El Niño were moderately wet. La Niña produces the opposite pattern globally, but Uganda shows a whiplash effect: the 2016–2017 La Niña was anomalously wet, not dry, likely due to residual moisture from the preceding El Niño. ENSO cycles are predicted to become more frequent under climate change.
+            El Niño warms Pacific surface waters, reversing atmospheric circulation and producing heavier rainfall across Uganda. The 2015–2016 event was record-breaking: all ten ZARDIs crossed SPEI +1.5, and the median SPEI for eastern zones reached 1.0, meaning even typical conditions during that El Niño were moderately wet. La Niña produces the opposite pattern globally, but Uganda shows a whiplash effect: the 2016–2017 La Niña was anomalously wet, likely due to residual moisture from the preceding El Niño. ENSO cycles are predicted to become more frequent and intense under climate change.
           </div>
         </div>
         <div class="enso-card">
           <div class="enso-title">Indian Ocean Dipole (IOD)</div>
           <div class="enso-body">
-            The IOD measures sea surface temperature anomalies between the eastern and western tropical Indian Ocean. A positive IOD (DMI &gt; 0.4) warms western Indian Ocean waters and produces more rainfall in East Africa. A negative IOD (DMI &lt; −0.4) cools western waters and reduces moisture. Crucially, the analysis found that pure positive IOD phases have no statistically significant relationship with SPEI in Uganda — but when positive IOD coincides with El Niño, strong drying correlations emerge in Mukono and Bulindi. Pure negative IOD phases show significant relationships in 80% of ZARDIs during JJA and all ZARDIs during MAM.
+            The IOD measures sea surface temperature anomalies between the eastern and western tropical Indian Ocean. A positive IOD (DMI &gt; 0.4) warms western Indian Ocean waters and produces more rainfall in East Africa. A negative IOD (DMI &lt; −0.4) cools western waters and reduces moisture. Crucially, pure positive IOD phases have no statistically significant relationship with SPEI in Uganda, but when coinciding with El Niño, strong wetting correlations emerge in Northern and Eastern regions. Pure negative IOD phases show significant relationships in 80% of ZARDIs during JJA and all ZARDIs during MAM.
           </div>
         </div>
       </div>
@@ -1427,10 +1437,11 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
             LinkedIn — Jonathan Khabusi
           </a>
-          <a href="https://github.com/jojosisa" target="_blank" rel="noopener" class="contact-link">
+
+          <!--a href="https://github.com/jojosisa" target="_blank" rel="noopener" class="contact-link">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
             GitHub — jojosisa
-          </a>
+          </a-->
         </div>
       </div>
       <div class="contact-right">
@@ -1470,11 +1481,11 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-name">Jonathan Sisa Khabusi</div>
+    <div class="footer-name">Jonathan Khabusi</div>
     <div>
       <a href="https://www.linkedin.com/in/jonathan-khabusi-5989b917a/" target="_blank" rel="noopener">LinkedIn</a>
       &nbsp;·&nbsp;
-      <a href="https://github.com/jojosisa" target="_blank" rel="noopener">GitHub</a>
+      <!--a href="https://github.com/jojosisa" target="_blank" rel="noopener">GitHub</a-->
     </div>
     <div>Kampala, Uganda · 2026</div>
   </footer>
